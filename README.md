@@ -67,7 +67,7 @@ Primero se importan las librerías necesarias para la lectura, procesamiento y a
 Estas herramientas son fundamentales para el análisis de señales de voz en el contexto del procesamiento digital de señales, permitiendo tanto la visualización como la extracción de características relevantes.
 
 <p align="center">
-
+<img width="1024" height="1536" alt="image" src="https://github.com/user-attachments/assets/945a1096-e777-4a98-b01e-3053878853b7" />
 </p>
 <p align="center">
   <em>Diagrama de flujo del codigo</em></p
@@ -304,4 +304,113 @@ Los valores finales de jitter y shimmer se resumen en la siguiente tabla:
 
 A partir de estos resultados, se observa que las señales masculinas presentan, en general, mayores valores de jitter y shimmer en comparación con las señales femeninas, lo cual indica una mayor variabilidad en la frecuencia y amplitud de estas señales bajo las condiciones de análisis realizadas.
 
+---
+
+### Parte C – Comparación y conclusiones
+
+#### 1. ¿Qué diferencias se observan en la frecuencia fundamental?
+
+A partir de los resultados obtenidos, se observa una diferencia clara entre las voces masculinas y femeninas en términos de frecuencia fundamental (F0).
+
+Las voces femeninas presentan valores de F0 más altos:
+- mujer1: 229.67 Hz  
+- mujer2: 178.44 Hz  
+- mujer3: 181.13 Hz  
+
+Mientras que las voces masculinas presentan valores más bajos:
+- hombre1: 113.74 Hz  
+- hombre2: 109.43 Hz  
+- hombre3: 154.84 Hz  
+
+Esto confirma el comportamiento esperado, ya que las voces masculinas tienen frecuencias fundamentales menores debido a que las cuerdas vocales son más largas y gruesas, generando vibraciones más lentas. En contraste, las voces femeninas presentan frecuencias más altas debido a cuerdas vocales más cortas y delgadas.
+
+---
+
+#### 2. ¿Qué otras diferencias notan en términos de brillo, media o intensidad?
+
+En cuanto a la frecuencia media y el brillo (centroide espectral), se observa que en general las voces femeninas tienden a presentar valores elevados, como en el caso de:
+- mujer2: 4337.16 Hz  
+- mujer3: 3353.4 Hz  
+
+Sin embargo, también se observa que una señal masculina (hombre3) presenta un valor alto (4712.82 Hz), lo cual indica que este parámetro no depende únicamente del género, sino también del contenido espectral específico de la señal y la forma de pronunciación.
+
+En términos de energía e intensidad (RMS), no se observa una relación directa con el género. Por ejemplo:
+- mujer2 presenta una intensidad alta (5071.45)
+- hombre2 presenta una intensidad baja (1367.55)
+
+Esto indica que estos parámetros dependen más de la fuerza de la voz, la distancia al micrófono y las condiciones de grabación, más que del género del hablante.
+
+---
+
+#### 3. Conclusiones sobre el comportamiento de la voz en hombres y mujeres
+
+El análisis realizado permite concluir que la frecuencia fundamental es el parámetro más confiable para diferenciar entre voces masculinas y femeninas, ya que presenta una separación clara entre ambos grupos.
+
+Por otro lado, parámetros como el brillo y la frecuencia media pueden mostrar tendencias generales, pero no son determinantes por sí solos, ya que pueden variar dependiendo del contenido espectral de la señal.
+
+En cuanto a la energía y la intensidad, estos parámetros no permiten diferenciar el género de forma directa, ya que dependen principalmente de la forma en que se emite la voz y de las condiciones de grabación.
+
+Adicionalmente, el análisis de jitter y shimmer mostró valores elevados en varias señales, especialmente en las masculinas:
+- hombre1: jitter 13.93%, shimmer 17.62%
+- hombre2: jitter 11.51%, shimmer 15.13%
+
+Estos valores indican una alta variabilidad en la señal, lo cual puede deberse a ruido, falta de periodicidad o condiciones no controladas durante la grabación.
+
+---
+
+#### 4. Importancia clínica del jitter y shimmer en el análisis de la voz
+
+El jitter y el shimmer son parámetros fundamentales en el análisis clínico de la voz, ya que permiten evaluar la estabilidad de la vibración de las cuerdas vocales.
+
+El jitter mide las variaciones en la frecuencia entre ciclos consecutivos, mientras que el shimmer mide las variaciones en la amplitud. En condiciones normales, estos valores suelen ser bajos (jitter < 1% y shimmer < 3–5%).
+
+En los resultados obtenidos, muchos valores superan estos rangos, lo cual puede deberse a:
+- Ruido en las señales
+- Segmentos no periódicos
+- Errores en la detección de picos
+- Condiciones de grabación no controladas
+
+En el ámbito clínico, valores elevados de jitter y shimmer pueden estar asociados a patologías vocales como disfonías o alteraciones en las cuerdas vocales. Sin embargo, en este caso no se puede concluir la presencia de una patología, ya que los valores también pueden estar influenciados por factores externos.
+
+Por lo tanto, estos parámetros son herramientas útiles para el análisis de la voz, pero deben ser interpretados en conjunto con otros estudios y en condiciones controladas.
+
+---
+
+## Discusión y analisis de resultados
+
+Las señales de voz en el laboratorio, la idea era meternos de lleno en cómo se comportan distintas características acústicas, tanto en el tiempo como en la frecuencia, y de paso mirar unos parámetros que miden la estabilidad de la voz, como el jitter y el shimmer.
+
+Lo primero que saltó a la vista fue lo de siempre: la frecuencia fundamental (esa que asociamos con el tono de la voz) es claramente distinta entre hombres y mujeres. En las voces femeninas andaba entre 178 Hz y 229 Hz, mientras que en las masculinas estaba más abajo, entre 109 Hz y 154 Hz. Nada nuevo bajo el sol, la teoría lo explica: cuerdas vocales más largas y gruesas vibran más lento (hombres), y las más cortas y delgadas vibran más rápido (mujeres).
+
+Después nos pusimos a ver otros aspectos, como el centroide espectral o el brillo, que básicamente te dicen dónde se concentra la energía en el espectro. Aquí las mujeres, en general, apuntan más hacia frecuencias altas. Pero ojo, no es una regla fija. Por ejemplo, en el archivo hombre3.wav los valores de frecuencia media salieron bastante altos. Eso te hace pensar que el asunto no es solo cuestión de género, también influye cómo pronuncia cada quien, la entonación, la intensidad y hasta lo que está diciendo en ese momento.
+
+Con el RMS, que viene siendo la intensidad promedio de la señal, no encontramos ningún patrón claro ligado al género. Había mujeres con RMS alto y hombres con RMS bajo, y viceversa. La explicación más sensata es que la intensidad depende más de cosas como si la persona habló cerca o lejos del micrófono, cómo estaba configurada la grabación, o el ruido del entorno, que de si es hombre o mujer.
+
+Ahora, el tema del jitter y el shimmer sí que dio para pensar. El jitter mide las variaciones en el periodo (la frecuencia) de un ciclo a otro, y el shimmer hace lo mismo pero con la amplitud. En una voz estable, estos valores suelen ser bajos. Pero cuando vimos los resultados, algunos eran altísimos. En voces masculinas, por ejemplo, encontramos jitter por encima del 10% y shimmer llegando al 17%. Para que te hagas una idea, lo que se considera normal suele ser jitter menor al 1% y shimmer entre 3% y 5% más o menos.
+
+Uno podría pensar que esos números tan altos son señal de algún problema vocal, pero no hay que apresurarse. Resulta que estos parámetros son muy sensibles. Si la señal tiene ruido, si hay partes donde la voz no es tan periódica, o si el algoritmo que usamos para detectar los picos falla un poco, los valores se disparan. Y como nuestras grabaciones no fueron en un entorno súper controlado, pues es probable que eso haya pasado. De hecho, para poder estimarlos bien tuvimos que filtrar y elegir ventanas donde la voz se viera más estable.
+
+En el mundo clínico, el jitter y el shimmer sí se usan para evaluar la voz, sobre todo en casos de disfonías o problemas en las cuerdas vocales. Pero si hablamos de patologías más complejas, como las afasias (que afectan el lenguaje, no la parte motora de la voz), pues estos parámetros no dicen mucho. En la disartria, que sí afecta el control muscular del habla, pueden tener más sentido, pero igual hay que combinarlos con otras pruebas.
+
+Al final, lo que queda claro es que estas herramientas son útiles, pero no son la verdad absoluta. Sirven para dar pistas, pero un diagnóstico clínico requiere más cosas: otros análisis acústicos, la opinión de especialistas, evaluaciones más completas.
+
+En resumen, el laboratorio nos sirvió para ver en la práctica cómo el procesamiento de señales (con Fourier, autocorrelación, filtros, etc.) permite describir la voz con números y gráficas. También aprendimos que los resultados dependen un montón de cómo se tomen las muestras y cómo se procesen. Y sí, aunque hay diferencias generales entre voces de hombres y mujeres, al final cada señal es única y está llena de matices.
+
+---
+
+## Conclusiones
+
+- Se logró implementar correctamente el procesamiento digital de señales de voz mediante herramientas como la Transformada de Fourier y la autocorrelación, permitiendo analizar las señales tanto en el dominio del tiempo como en el dominio de la frecuencia.
+
+- La frecuencia fundamental (F0) demostró ser el parámetro más confiable para diferenciar entre voces masculinas y femeninas, evidenciando valores más altos en las voces femeninas y más bajos en las masculinas, en concordancia con las características fisiológicas de las cuerdas vocales.
+
+- El análisis del centroide espectral (frecuencia media) y el brillo mostró que las voces femeninas tienden a presentar mayor contenido en frecuencias altas; sin embargo, estos parámetros no son completamente determinantes, ya que dependen del contenido espectral específico de cada señal.
+
+- La energía y la intensidad (RMS) no presentaron una relación directa con el género, lo que indica que estos parámetros están más influenciados por factores como la forma de emisión de la voz, la intensidad del hablante y las condiciones de grabación.
+
+- Los parámetros de jitter y shimmer permitieron evaluar la estabilidad de la señal de voz; sin embargo, los valores obtenidos fueron en muchos casos superiores a los rangos típicos, evidenciando la sensibilidad de estos indicadores frente al ruido, la falta de periodicidad y posibles errores en la detección de picos.
+
+- Se evidenció la importancia del preprocesamiento de la señal, especialmente el filtrado y la selección de ventanas periódicas, ya que estos procesos influyen significativamente en la precisión de los resultados obtenidos.
+
+- Se permitió comprender la relevancia del procesamiento digital de señales en aplicaciones como el análisis biomédico y el reconocimiento de voz, destacando la necesidad de trabajar con señales de buena calidad y condiciones controladas para obtener resultados más precisos
 
