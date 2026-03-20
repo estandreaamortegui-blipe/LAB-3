@@ -134,7 +134,7 @@ A partir de estos cálculos, se generaron los espectros de magnitud considerando
       <em>GRAFICA HOMBRE 1</em>
     </td>
     <td align="center">
-
+<img width="825" height="612" alt="image" src="https://github.com/user-attachments/assets/8ffdf001-3b38-48a3-8c3e-870d56953cf0" />
       <br />
       <em>ESPECTRO DE FRECUENCIA HOMBRE 1</em>
     </td>
@@ -183,12 +183,31 @@ Adicionalmente, se calcularon parámetros característicos de cada señal de voz
 corr = np.correlate(signal, signal, mode='full')
 corr = corr[len(corr)//2:]
 ```
+La frecuencia media o centroide espectral se calculó como el promedio ponderado de las frecuencias presentes en la señal, indicando el “centro de masa” del espectro.
+
+```python
+frecuencia_media = np.sum(frecuencias * magnitud) / np.sum(magnitud)
+```
+El brillo corresponde al centroide espectral, por lo que valores más altos indican mayor contenido en frecuencias altas.
+
+La energía de la señal se obtuvo como la suma del cuadrado de sus amplitudes, representando la potencia total de la señal.
+
+```python
+energia = np.sum(audio**2)
+```
+La intensidad se calculó mediante el valor RMS (Root Mean Square), el cual representa el nivel promedio de la amplitud de la señal.
+
+```python
+rms = np.sqrt(np.mean(audio**2))
+```
+
 
 ### Representación gráfica de las señales
 
 Las gráficas obtenidas permiten visualizar claramente las diferencias entre las señales de voz. En el dominio del tiempo se observan variaciones en la amplitud y forma de onda, mientras que en el dominio de la frecuencia se identifican las componentes principales de cada señal.
 
 A partir de estas representaciones, es posible evidenciar que las voces femeninas presentan mayor contenido en frecuencias altas, mientras que las voces masculinas concentran su energía en frecuencias más bajas.
+
 
 ### Resultado parte A
 
@@ -237,3 +256,52 @@ senal_filtrada = filtro_pasabanda(senal, fs, f_low, f_high)
     </td>
   </tr>
 </table>
+
+En los puntos dos, tres y cuatro, se realizó la medición de jitter y shimmer con el objetivo de evaluar la estabilidad de las señales de voz, teniendo en cuenta las variaciones en la frecuencia y en la amplitud a lo largo del tiempo.
+
+Para el desarrollo de esta parte, inicialmente se aplicó un filtro pasa banda a cada señal con el fin de aislar el rango de frecuencias correspondiente a la voz humana. Posteriormente, se seleccionó una ventana de la señal con comportamiento periódico, lo que permitió realizar un análisis más preciso.
+
+#### Medición del Jitter (variación en la frecuencia fundamental)
+
+El jitter mide la variación en el periodo de la señal de voz entre ciclos consecutivos. Para su cálculo, se detectaron los picos de la señal, los cuales representan los ciclos de vibración. A partir de estos picos, se calcularon los periodos \( T_i \) y sus diferencias sucesivas.
+
+El jitter absoluto se obtuvo como el promedio de las diferencias entre periodos consecutivos, mientras que el jitter relativo se calculó como el porcentaje de esta variación respecto al periodo promedio.
+
+Los resultados obtenidos muestran valores elevados de jitter en varias señales, especialmente en las voces masculinas. Por ejemplo, la señal *hombre1.wav* presenta un jitter de 13.9308%, mientras que *mujer3.wav* alcanza un valor de 12.4154%. Estos valores se encuentran por encima del rango típico (menor al 1%), lo que indica una alta variabilidad en la frecuencia de la señal.
+
+#### Medición del Shimmer (variación en la amplitud)
+
+El shimmer mide la variación en la amplitud de la señal entre ciclos consecutivos. Para su cálculo, se tomaron las amplitudes en los picos detectados y se analizaron las diferencias entre valores consecutivos.
+
+El shimmer absoluto corresponde al promedio de estas diferencias, mientras que el shimmer relativo se expresa como un porcentaje respecto a la amplitud promedio.
+
+En los resultados obtenidos, se observan valores de shimmer superiores a los rangos típicos (3%–5%). Por ejemplo, la señal *hombre1.wav* presenta un shimmer de 17.6272%, y *hombre2.wav* alcanza 15.1376%. Incluso en señales femeninas como *mujer3.wav*, el valor es de 10.0855%, lo cual indica una variabilidad significativa en la amplitud de la señal.
+
+#### Análisis de los resultados
+
+Los valores obtenidos de jitter y shimmer evidencian una alta variabilidad en varias de las señales analizadas. Esto puede explicarse por diferentes factores:
+
+- Presencia de ruido en las grabaciones.
+- Segmentos de voz que no son completamente periódicos.
+- Variaciones naturales en la producción vocal de los hablantes.
+- Limitaciones en la detección automática de picos.
+- Condiciones no controladas durante la adquisición de las señales.
+
+Además, es importante considerar que el cálculo de estos parámetros depende fuertemente de la correcta identificación de los ciclos de la señal. Si la señal no presenta una periodicidad clara, los valores de jitter y shimmer pueden aumentar considerablemente.
+
+#### Resultados obtenidos
+
+Los valores finales de jitter y shimmer se resumen en la siguiente tabla:
+
+| Archivo     | Genero | Jitter (%) | Shimmer (%) |
+|------------|--------|------------|-------------|
+| mujer1.wav | Mujer  | 3.1462     | 4.9545      |
+| mujer2.wav | Mujer  | 2.2534     | 5.5305      |
+| mujer3.wav | Mujer  | 12.4154    | 10.0855     |
+| hombre1.wav| Hombre | 13.9308    | 17.6272     |
+| hombre2.wav| Hombre | 11.5165    | 15.1376     |
+| hombre3.wav| Hombre | 11.6516    | 12.5142     |
+
+A partir de estos resultados, se observa que las señales masculinas presentan, en general, mayores valores de jitter y shimmer en comparación con las señales femeninas, lo cual indica una mayor variabilidad en la frecuencia y amplitud de estas señales bajo las condiciones de análisis realizadas.
+
+
